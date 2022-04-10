@@ -38,7 +38,7 @@ function leer(){
       <td>${titulo}</td>
       <td>${descripcion}</td>
       <td>${precio}</td>
-      <td><button onclick="eliminar()" class="btn btn-danger">Eliminar</button></td>
+      <td><button onclick="eliminar('${titulo}')" class="btn btn-danger">Eliminar</button></td>
       <td><button onclick ="editar('${titulo}')" class="btn btn-success">Editar</button></td>
     </tr>`
   }
@@ -83,55 +83,15 @@ function actualizar(i){
   libros[i].precio1 = document.getElementById("newprecio").value;
   localStorage.setItem("Libros",JSON.stringify(libros));
 }
+function eliminar(titulo){
+    let libros = JSON.parse(localStorage.getItem("Libros"));
+    for(let i =0;i<libros.length;i++){
+        if(libros[i].titulo1===titulo){
+            libros.splice(i,1);
+        }
+    }
+    localStorage.setItem("Libros",JSON.stringify(libros));
+    leer();
+    
+}
 leer();
-/*var formulariohtml = document.getElementById("formulario");
- formulariohtml.addEventListener("submit",()=>{
-  
-  titulo = document.getElementById('titulo').value;
-  descripcion = document.getElementById("descripcion").value;
-  precio = document.getElementById("precio").value;
- 
-let libro = {
- titulo,
- descripcion,
- precio
-}
-if(localStorage.getItem("Libros")===null){
- let libros =[];
- libros.push(libro);
- localStorage.setItem("Libros",JSON.stringify(libros));
-}
-else{
- let libros = JSON.parse(localStorage.getItem("Libros"));
- libros.push(libro);
- localStorage.setItem("Libros",JSON.stringify(libros));
-}
-document.getElementById("formulario").reset();
-console.log("Libro guardado");
-}); */
-
-/* function crear(e){
-   titulo = document.getElementById('titulo').value;
-   descripcion = document.getElementById("descripcion").value;
-   precio = document.getElementById("precio").value;
-  
-let libro = {
-  titulo,
-  descripcion,
-  precio
-}
-if(localStorage.getItem("Libros")===null){
-  let libros =[];
-  libros.push(libro);
-  localStorage.setItem("Libros",JSON.stringify(libros));
-}
-else{
-  let libros = JSON.parse(localStorage.getItem("Libros"));
-  libros.push(libro);
-  localStorage.setItem("Libros",JSON.stringify(libros));
-}
-document.getElementById("formulario").reset();
-console.log("Libro guardado");
-
-
-} */
